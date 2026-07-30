@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Ticker from './components/Ticker';
+import ProductHighlight from './components/ProductHighlight';
 import About from './components/About';
 import Process from './components/Process';
 import ServerDiagram from './components/ServerDiagram';
@@ -16,11 +17,13 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import CustomCursor from './components/CustomCursor';
 
 function Home() {
   return (
     <>
       <Hero />
+      <ProductHighlight />
       <Ticker />
       <About />
       <Process />
@@ -39,6 +42,7 @@ function Home() {
 function App() {
   return (
     <>
+      <CustomCursor />
       <Navbar />
       <main>
         <Routes>

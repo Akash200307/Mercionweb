@@ -224,6 +224,7 @@
   .about-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .differentiators-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -257,28 +258,36 @@
   .about-grid {
     grid-template-columns: 1fr;
   }
+
   .differentiators-grid {
     grid-template-columns: 1fr;
   }
+
   .about {
     padding: 80px 20px;
   }
+
   .about-mission {
     margin-top: 60px;
     margin-bottom: 60px;
   }
+
   .about-mission-desc {
     font-size: 15px;
   }
+
   .differentiator-card {
     padding: 32px 24px;
   }
+
   .differentiator-icon {
     font-size: 36px;
   }
+
   .differentiator-title {
     font-size: 16px;
   }
+
   .differentiator-desc {
     font-size: 13px;
   }
@@ -288,31 +297,40 @@
   .about {
     padding: 80px 16px;
   }
+
   .about-card {
     padding: 32px 20px;
   }
+
   .about-card-title {
     font-size: 18px;
   }
+
   .about-card-desc {
     font-size: 13px;
   }
+
   .about-mission {
     margin-top: 48px;
     margin-bottom: 48px;
   }
+
   .about-mission-desc {
     font-size: 14px;
   }
+
   .differentiator-card {
     padding: 28px 20px;
   }
+
   .differentiator-icon {
     font-size: 32px;
   }
+
   .differentiator-title {
     font-size: 15px;
   }
+
   .differentiator-desc {
     font-size: 12px;
   }

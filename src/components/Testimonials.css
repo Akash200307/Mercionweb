@@ -1,76 +1,148 @@
-.testimonials { background: var(--void); overflow: hidden; position: relative; }
-
-.test-grid { 
-  display: grid; 
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 2px; 
-  background: var(--border); 
-  margin-top: 64px; 
+.testimonials {
+  background: var(--void);
+  overflow: hidden;
+  position: relative;
 }
 
-.test-card { 
-  background: var(--card); 
-  padding: 48px 40px; 
-  position: relative; 
+.test-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  margin-top: 64px;
+}
+
+.test-card {
+  background: var(--card);
+  padding: 48px 40px;
+  position: relative;
   transition: background 0.4s ease, transform 0.4s ease;
 }
+
 .test-card:hover {
   background: var(--card2);
   transform: translateY(-5px);
   z-index: 1;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
-.test-quote { 
-  font-family: var(--font-display); 
-  font-size: 120px; 
-  color: var(--border2); 
-  line-height: 0.8; 
-  display: block; 
+.test-quote {
+  font-family: var(--font-display);
+  font-size: 120px;
+  color: var(--border2);
+  line-height: 0.8;
+  display: block;
   margin-bottom: 24px;
   transition: color 0.4s;
 }
-.test-card:hover .test-quote { color: rgba(230,0,0,0.2); }
 
-.test-text { 
-  font-size: 16px; 
-  line-height: 1.8; 
-  color: var(--text-secondary); 
-  margin-bottom: 40px; 
-  font-style: italic; 
+.test-card:hover .test-quote {
+  color: rgba(230, 0, 0, 0.2);
 }
 
-.test-author { display: flex; align-items: center; gap: 16px; }
+.test-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  font-style: italic;
+}
 
-.test-avatar { 
-  width: 48px; height: 48px; 
-  background: rgba(230,0,0,0.1); 
+.test-author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.test-avatar {
+  width: 48px;
+  height: 48px;
+  background: rgba(230, 0, 0, 0.1);
   border: 1px solid var(--red-dim);
   border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; 
-  font-family: var(--font-display); font-size: 20px; color: var(--red); 
-  flex-shrink: 0; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--red);
+  flex-shrink: 0;
   box-shadow: 0 0 10px var(--red-glow);
 }
 
-.test-name { font-family: var(--font-heading); font-size: 15px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--white); }
-.test-role { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); letter-spacing: 1px; margin-top: 4px; }
+.test-name {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.test-role {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
 
 @media (max-width: 900px) {
-  .test-grid { grid-template-columns: 1fr; gap: 24px; background: transparent; }
-  .test-card { border: 1px solid var(--border); border-radius: 8px; }
-  .testimonials { padding: 80px 24px; }
+  .test-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    background: transparent;
+  }
+
+  .test-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .testimonials {
+    padding: 80px 24px;
+  }
 }
+
 @media (max-width: 600px) {
-  .test-card { padding: 32px 20px; }
-  .test-quote { font-size: 80px; margin-bottom: 16px; }
-  .test-text { font-size: 15px; }
-  .test-name { font-size: 14px; }
+  .test-card {
+    padding: 32px 20px;
+  }
+
+  .test-quote {
+    font-size: 80px;
+    margin-bottom: 16px;
+  }
+
+  .test-text {
+    font-size: 15px;
+  }
+
+  .test-name {
+    font-size: 14px;
+  }
 }
+
 @media (max-width: 480px) {
-  .testimonials { padding: 80px 20px; }
-  .test-card { padding: 28px 16px; }
-  .test-quote { font-size: 64px; }
-  .test-avatar { width: 40px; height: 40px; font-size: 16px; }
-  .test-grid { gap: 16px; }
+  .testimonials {
+    padding: 80px 20px;
+  }
+
+  .test-card {
+    padding: 28px 16px;
+  }
+
+  .test-quote {
+    font-size: 64px;
+  }
+
+  .test-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .test-grid {
+    gap: 16px;
+  }
 }

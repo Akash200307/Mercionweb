@@ -49,7 +49,7 @@ export default function Comparison() {
             <tbody>
               <tr>
                 <td className="feature-col">Base Renewal Price</td>
-                <td className="mercion-col" style={{color: 'var(--green)'}}>₹179/mo</td>
+                <td className="mercion-col" style={{color: 'var(--green)'}}>₹149/mo</td>
                 <td><span className="cross">✘</span> ₹349+/mo</td>
                 <td><span className="cross">✘</span> ₹499+/mo</td>
                 <td><span className="cross">✘</span> ₹499+/mo</td>
@@ -140,7 +140,7 @@ export default function Comparison() {
             <tbody>
               <tr>
                 <td className="feature-col">Base Renewal Price</td>
-                <td className="mercion-col" style={{color: 'var(--green)'}}>₹199/mo</td>
+                <td className="mercion-col" style={{color: 'var(--green)'}}>₹179/mo</td>
                 <td><span className="cross">✘</span> ₹399+/mo</td>
                 <td><span className="cross">✘</span> ₹599+/mo</td>
                 <td><span className="cross">✘</span> ₹599+/mo</td>

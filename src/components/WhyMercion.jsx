@@ -35,7 +35,7 @@ export default function WhyMercion() {
     {
       num: "02",
       title: "More Affordable Than the Rest",
-      desc: "Our pricing starts at just ₹179/month with no predatory renewal hikes. Competitors charge 2–3x more on renewal. We don't."
+      desc: "Our pricing starts at just ₹149/month with no predatory renewal hikes. Competitors charge 2–3x more on renewal. We don't."
     },
     {
       num: "03",
