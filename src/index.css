@@ -41,6 +41,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Kill rubber-band / overscroll bounce jank, which is one of the
+   biggest sources of perceived "laggy" scrolling on dark, heavy pages */
+html,
+body {
+  overscroll-behavior: none;
+  scrollbar-gutter: stable;
+}
+
 body {
   background: var(--void);
   color: var(--text-primary);
@@ -66,7 +74,12 @@ body::before {
   pointer-events: none;
   z-index: 1;
   opacity: 0.4;
+  /* Promote to its own GPU layer and isolate its paint area so it
+     never forces a repaint of the rest of the page while scrolling */
   will-change: transform;
+  transform: translateZ(0);
+  contain: strict;
+  backface-visibility: hidden;
 }
 
 /* SCANLINE OVERLAY */
@@ -89,6 +102,18 @@ body::after {
   z-index: 1;
   animation: scanlines 8s linear infinite;
   will-change: transform;
+  transform: translateZ(0);
+  contain: strict;
+  backface-visibility: hidden;
+}
+
+/* Pause the decorative overlays while the user is actively scrolling.
+   Toggle the "is-scrolling" class on <body> from JS (snippet below the
+   CSS) — this removes the single biggest cause of scroll jank: two
+   full-viewport fixed layers repainting every frame during a fast scroll. */
+body.is-scrolling::before,
+body.is-scrolling::after {
+  animation-play-state: paused;
 }
 
 /* Optimize out heavy SVG filters on mobile/touch screens to ensure smooth scrolling */
@@ -168,6 +193,9 @@ body:has(button:hover) .cursor-ring {
   transition: all 0.3s ease;
   clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
   z-index: 2;
+  /* Isolate so the shine sweep + hover shadow don't trigger
+     layout/paint on surrounding elements */
+  transform: translateZ(0);
 }
 
 .btn-primary::before {
@@ -186,7 +214,7 @@ body:has(button:hover) .cursor-ring {
 .btn-primary:hover {
   background: var(--red-bright);
   box-shadow: 0 0 20px var(--red-glow);
-  transform: translateY(-2px);
+  transform: translateY(-2px) translateZ(0);
 }
 
 .btn-primary:hover::before {
@@ -202,19 +230,24 @@ body:has(button:hover) .cursor-ring {
   color: var(--text-primary);
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--border2);
   padding: 16px 40px;
   text-decoration: none;
   display: inline-block;
   transition: all 0.3s ease;
   clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  /* backdrop-filter is one of the most expensive properties to keep
+     recalculating during scroll — pin it to its own layer */
+  will-change: backdrop-filter;
+  transform: translateZ(0);
 }
 
 .btn-secondary:hover {
   border-color: var(--red);
   color: var(--white);
   background: rgba(230, 0, 0, 0.1);
-  transform: translateY(-2px);
+  transform: translateY(-2px) translateZ(0);
 }
 
 /* SECTION BASE */
@@ -267,11 +300,19 @@ section {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Once a reveal has finished animating in, drop will-change so the
+   browser stops reserving a compositor layer for elements that are
+   done animating — keeps memory/GPU usage low on long pages */
+.reveal.visible {
+  will-change: auto;
 }
 
 /* CONTAINER */
@@ -343,15 +384,19 @@ section {
   background: var(--red);
 }
 
-:-webkit-scrollbar-track {
-  background: var(--void);
-}
+/* Respect users who've asked their OS/browser to reduce motion —
+   also happens to eliminate the heaviest animated layers entirely */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: var(--red-dim);
-  border-radius: 4px;
-}
+  body::before,
+  body::after {
+    animation: none;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--red);
+  .reveal {
+    transition: none;
+  }
 }
