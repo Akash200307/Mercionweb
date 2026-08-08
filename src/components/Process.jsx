@@ -21,8 +21,19 @@ export default function Process() {
     },
     {
       number: '02',
-      title: 'Register Domain',
-      desc: 'Get your perfect domain name or transfer your existing one. Free domain included with annual plans.',
+      title: 'Checkout via WHMCS',
+      desc: 'Pay securely in INR with Razorpay. Your order is confirmed in our WHMCS client portal — invoices and renewals stay in one place.',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+          <line x1="1" y1="10" x2="23" y2="10" />
+        </svg>
+      )
+    },
+    {
+      number: '03',
+      title: 'Point Your Domain',
+      desc: 'Use a domain you already own (DNS A/CNAME). Domain registration & transfer are launching soon — temporary URLs work at go-live.',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10" />
@@ -32,21 +43,9 @@ export default function Process() {
       )
     },
     {
-      number: '03',
-      title: 'Configure Hosting',
-      desc: 'Set up your hosting with our intuitive control panel. One-click WordPress install, SSL, and more.',
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-          <line x1="8" y1="21" x2="16" y2="21" />
-          <line x1="12" y1="17" x2="12" y2="21" />
-        </svg>
-      )
-    },
-    {
       number: '04',
       title: 'Launch Website',
-      desc: 'Your website is live! Enjoy blazing-fast performance, 99.9% uptime, and 24/7 support.',
+      desc: 'Hosting auto-provisions on CyberPanel with SSL. Enjoy fast OpenLiteSpeed performance and 24/7 support.',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M5 12h14" />

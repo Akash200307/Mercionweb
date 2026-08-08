@@ -1,7 +1,19 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ProductHighlight.css';
 
+function goToPricingTab(navigate, tab) {
+  sessionStorage.setItem('pricingTab', tab);
+  window.dispatchEvent(new CustomEvent('pricing-tab', { detail: tab }));
+  navigate(`/?tab=${tab}#pricing`);
+  requestAnimationFrame(() => {
+    const el = document.getElementById('pricing');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
 export default function ProductHighlight() {
+  const navigate = useNavigate();
   const revealRefs = useRef([]);
 
   useEffect(() => {
@@ -13,14 +25,14 @@ export default function ProductHighlight() {
       });
     }, { threshold: 0.1 });
 
-    revealRefs.current.forEach(el => {
+    revealRefs.current.forEach((el) => {
       if (el) observer.observe(el);
     });
 
     return () => observer.disconnect();
   }, []);
 
-  const addToRefs = el => {
+  const addToRefs = (el) => {
     if (el && !revealRefs.current.includes(el)) {
       revealRefs.current.push(el);
     }
@@ -28,77 +40,76 @@ export default function ProductHighlight() {
 
   const products = [
     {
-      id: "vps",
-      tag: "POPULAR",
-      title: "High Performance Cloud",
-      desc: "Blazing fast VPS & Shared hosting powered by OLS and NVMe SSDs. Ideal for apps, portals, and high-traffic websites.",
-      price: "149",
+      id: 'shared',
+      tag: 'SHARED',
+      title: 'High Performance Hosting',
+      desc: 'Shared hosting on CyberPanel + OpenLiteSpeed. Clear storage limits, unmetered bandwidth on most plans, honest renewals.',
+      price: '149',
       specs: [
-        { label: "Storage", val: "NVMe SSD (Up to 100GB)" },
-        { label: "Control Panel", val: "CyberPanel (OLS)" },
-        { label: "IP Address", val: "Dedicated IP Available" },
-        { label: "Bandwidth", val: "Unmetered" }
+        { label: 'Storage', val: '2–10 GB SSD by plan' },
+        { label: 'Control Panel', val: 'CyberPanel (OLS)' },
+        { label: 'Sites', val: '1 → Unlimited' },
+        { label: 'Bandwidth', val: 'Unmetered' },
       ],
-      link: "#pricing",
-      btnText: "Configure Cloud VPS"
+      tab: 'hosting',
+      btnText: 'View Shared Plans',
     },
     {
-      id: "wordpress",
-      tag: "MANAGED",
-      title: "Optimized WP Hosting",
-      desc: "Fully managed environments pre-configured with LiteSpeed Cache, daily backups, staging tools, and premium security.",
-      price: "179",
+      id: 'wordpress',
+      tag: 'MANAGED',
+      title: 'WordPress Hosting',
+      desc: 'WP-ready plans with LiteSpeed Cache, SSL, and staging/migration on Pro and Business tiers.',
+      price: '179',
       specs: [
-        { label: "Caching", val: "LiteSpeed Enterprise Cache" },
-        { label: "Migration", val: "Free Professional Migration" },
-        { label: "Staging", val: "1-Click Staging Included" },
-        { label: "Security", val: "Malware Shield & Firewalls" }
+        { label: 'Caching', val: 'LiteSpeed Cache' },
+        { label: 'Migration', val: 'Free on WP Pro+' },
+        { label: 'Staging', val: 'WP Pro & Business' },
+        { label: 'Backups', val: 'Weekly → Daily by tier' },
       ],
-      link: "#pricing",
-      btnText: "Deploy WordPress"
+      tab: 'wordpress',
+      btnText: 'View WP Plans',
     },
     {
-      id: "dedicated",
-      tag: "ENTERPRISE",
-      title: "Dedicated & AI Bare Metal",
-      desc: "Raw computing power with dedicated CPU/GPU cores, custom NVMe configurations, private networking, and maximum isolation.",
-      price: "Custom",
+      id: 'dedicated',
+      tag: 'ENTERPRISE',
+      title: 'Dedicated & AI Workloads',
+      desc: 'Custom resources when shared plans aren’t enough — talk to us for dedicated or GPU-oriented setups.',
+      price: 'Custom',
       specs: [
-        { label: "Processor", val: "Intel Xeon / AMD EPYC Cores" },
-        { label: "AI Workloads", val: "GPU Server Configurations" },
-        { label: "SLA Guarantee", val: "99.99% Contractual Uptime" },
-        { label: "Support", val: "24/7 Dedicated Account Manager" }
+        { label: 'Processor', val: 'Dedicated vCPU / bare metal' },
+        { label: 'AI Workloads', val: 'Custom GPU options' },
+        { label: 'SLA', val: 'Contracted uptime' },
+        { label: 'Support', val: 'Priority account help' },
       ],
-      link: "#contact",
-      btnText: "Build Custom Server"
-    }
+      tab: null,
+      link: '#contact',
+      btnText: 'Talk to Sales',
+    },
   ];
 
   return (
     <section className="product-highlight" id="products">
       <div className="ph-glow-bg"></div>
-      
+
       <div className="ph-header reveal" ref={addToRefs}>
         <div className="section-label">
           <div className="section-label-line"></div>
           <span className="section-label-text">// Server Infrastructure</span>
         </div>
-        <h2 className="section-title">CHOOSE YOUR <span style={{color: 'var(--red)'}}>ENGINE.</span></h2>
+        <h2 className="section-title">
+          CHOOSE YOUR <span style={{ color: 'var(--red)' }}>ENGINE.</span>
+        </h2>
         <p className="section-desc ph-subtitle">
           From developer-friendly cloud VPS to fully managed WordPress environments and high-performance bare metal.
         </p>
       </div>
 
       <div className="ph-grid">
-        {products.map((product, idx) => (
-          <div 
-            key={product.id} 
-            className={`ph-card reveal ${product.id}`} 
-            ref={addToRefs}
-          >
+        {products.map((product) => (
+          <div key={product.id} className={`ph-card reveal ${product.id}`} ref={addToRefs}>
             <div className="ph-card-glow"></div>
             <div className="ph-card-border"></div>
-            
+
             <div className="ph-card-header">
               <span className="ph-tag">{product.tag}</span>
               <div className="ph-status-light">
@@ -122,7 +133,7 @@ export default function ProductHighlight() {
             <div className="ph-price-section">
               <div className="ph-price-lbl">Starting At</div>
               <div className="ph-price-amt">
-                {product.price === "Custom" ? (
+                {product.price === 'Custom' ? (
                   <span className="custom-price">Custom</span>
                 ) : (
                   <>
@@ -134,9 +145,19 @@ export default function ProductHighlight() {
               </div>
             </div>
 
-            <a href={product.link} className={`ph-card-btn ${product.price === "Custom" ? 'enterprise-btn' : ''}`}>
-              {product.btnText} <span className="arrow">→</span>
-            </a>
+            {product.tab ? (
+              <button
+                type="button"
+                className="ph-card-btn"
+                onClick={() => goToPricingTab(navigate, product.tab)}
+              >
+                {product.btnText} <span className="arrow">→</span>
+              </button>
+            ) : (
+              <a href={product.link} className="ph-card-btn enterprise-btn">
+                {product.btnText} <span className="arrow">→</span>
+              </a>
+            )}
           </div>
         ))}
       </div>

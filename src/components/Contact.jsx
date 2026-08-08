@@ -1,16 +1,25 @@
 import { useState } from 'react';
+import { site, mailtoContact } from '../config/site';
+import { whmcsUrls } from '../config/whmcs';
 import './Contact.css';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', company: '', subject: '', message: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    subject: '',
+    message: '',
+  });
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    window.location.href = mailtoContact(formData);
     setSubmitted(true);
   };
 
@@ -20,87 +29,124 @@ export default function Contact() {
       <div className="contact-bg-orb contact-bg-orb2"></div>
 
       <div className="contact-inner">
-        {/* Header */}
         <div className="contact-header">
           <div className="section-label">
             <div className="section-label-line"></div>
             <span className="section-label-text">// Get In Touch</span>
           </div>
-          <h2 className="section-title">LET'S BUILD SOMETHING <span style={{ color: 'var(--red)' }}>GREAT.</span></h2>
-          <p className="section-desc">Have a question, need a custom enterprise plan, or want to discuss your infrastructure needs? We respond within 2 hours.</p>
+          <h2 className="section-title">
+            LET&apos;S BUILD SOMETHING <span style={{ color: 'var(--red)' }}>GREAT.</span>
+          </h2>
+          <p className="section-desc">
+            Questions, enterprise plans, or migrations — we respond during business hours IST.
+            Existing customers can also open a ticket in the client area.
+          </p>
         </div>
 
         <div className="contact-layout">
-          {/* Info Panel */}
           <div className="contact-info">
             <div className="contact-info-card">
               <div className="contact-info-icon">📧</div>
               <div>
                 <div className="contact-info-label">Email Us</div>
-                <a href="mailto:support@mercioncloud.com" className="contact-info-value">support@mercioncloud.com</a>
+                <a href={`mailto:${site.emails.hello}`} className="contact-info-value">
+                  {site.emails.hello}
+                </a>
               </div>
             </div>
-            <div className="contact-info-card">
-              <div className="contact-info-icon">📞</div>
-              <div>
-                <div className="contact-info-label">Call Us</div>
-                <a href="tel:+919999999999" className="contact-info-value">+91 99999 99999</a>
+            {site.phone ? (
+              <div className="contact-info-card">
+                <div className="contact-info-icon">📞</div>
+                <div>
+                  <div className="contact-info-label">Call / WhatsApp</div>
+                  <a href={`tel:${site.phone.replace(/\s/g, '')}`} className="contact-info-value">
+                    {site.phone}
+                  </a>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="contact-info-card">
+                <div className="contact-info-icon">💬</div>
+                <div>
+                  <div className="contact-info-label">Client Area</div>
+                  <a
+                    href={whmcsUrls.clientArea}
+                    className="contact-info-value"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Open support ticket
+                  </a>
+                </div>
+              </div>
+            )}
             <div className="contact-info-card">
               <div className="contact-info-icon">🕐</div>
               <div>
                 <div className="contact-info-label">Response Time</div>
-                <div className="contact-info-value">Within 2 Hours</div>
+                <div className="contact-info-value">{site.responseSla}</div>
               </div>
             </div>
             <div className="contact-info-card">
               <div className="contact-info-icon">📍</div>
               <div>
                 <div className="contact-info-label">Based In</div>
-                <div className="contact-info-value">India 🇮🇳</div>
+                <div className="contact-info-value">{site.location}</div>
               </div>
             </div>
 
             <div className="contact-status-panel">
               <div className="status-dot-live"></div>
-              <span>All systems operational — 99.9% uptime guaranteed</span>
+              <span>Hosting stack: CyberPanel · OpenLiteSpeed · WHMCS billing</span>
             </div>
           </div>
 
-          {/* Form */}
           <div className="contact-form-wrap">
             {submitted ? (
               <div className="contact-success">
-                <div className="contact-success-icon">✅</div>
-                <h3>Message Received!</h3>
-                <p>Our team will get back to you within 2 hours. Check your inbox for a confirmation.</p>
-                <button className="btn-primary" onClick={() => setSubmitted(false)} style={{ marginTop: '24px' }}>Send Another</button>
+                <div className="contact-success-icon">✓</div>
+                <h3>Email draft opened</h3>
+                <p>
+                  If your mail app didn&apos;t open, write us at{' '}
+                  <a href={`mailto:${site.emails.hello}`}>{site.emails.hello}</a>.
+                </p>
+                <button
+                  type="button"
+                  className="btn-primary"
+                  onClick={() => setSubmitted(false)}
+                  style={{ marginTop: '24px' }}
+                >
+                  Send Another
+                </button>
               </div>
             ) : (
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="form-row">
                   <div className="form-group">
-                    <label className="form-label" htmlFor="contact-name">Full Name <span className="required">*</span></label>
+                    <label className="form-label" htmlFor="contact-name">
+                      Full Name <span className="required">*</span>
+                    </label>
                     <input
                       id="contact-name"
                       className="form-input"
                       type="text"
                       name="name"
-                      placeholder="John Smith"
+                      placeholder="Your name"
                       value={formData.name}
                       onChange={handleChange}
                       required
                     />
                   </div>
                   <div className="form-group">
-                    <label className="form-label" htmlFor="contact-email">Email Address <span className="required">*</span></label>
+                    <label className="form-label" htmlFor="contact-email">
+                      Email Address <span className="required">*</span>
+                    </label>
                     <input
                       id="contact-email"
                       className="form-input"
                       type="email"
                       name="email"
-                      placeholder="john@company.com"
+                      placeholder="you@company.com"
                       value={formData.email}
                       onChange={handleChange}
                       required
@@ -109,19 +155,23 @@ export default function Contact() {
                 </div>
                 <div className="form-row">
                   <div className="form-group">
-                    <label className="form-label" htmlFor="contact-company">Company / Organization</label>
+                    <label className="form-label" htmlFor="contact-company">
+                      Company / Organization
+                    </label>
                     <input
                       id="contact-company"
                       className="form-input"
                       type="text"
                       name="company"
-                      placeholder="Acme Corp."
+                      placeholder="Optional"
                       value={formData.company}
                       onChange={handleChange}
                     />
                   </div>
                   <div className="form-group">
-                    <label className="form-label" htmlFor="contact-subject">Subject <span className="required">*</span></label>
+                    <label className="form-label" htmlFor="contact-subject">
+                      Subject <span className="required">*</span>
+                    </label>
                     <select
                       id="contact-subject"
                       className="form-input form-select"
@@ -130,7 +180,9 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                     >
-                      <option value="" disabled>Select a topic…</option>
+                      <option value="" disabled>
+                        Select a topic…
+                      </option>
                       <option value="enterprise">Enterprise Plan Inquiry</option>
                       <option value="sales">Sales &amp; Pricing</option>
                       <option value="support">Technical Support</option>
@@ -141,16 +193,18 @@ export default function Contact() {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label className="form-label" htmlFor="contact-message">Your Message <span className="required">*</span></label>
+                  <label className="form-label" htmlFor="contact-message">
+                    Your Message <span className="required">*</span>
+                  </label>
                   <textarea
                     id="contact-message"
                     className="form-input form-textarea"
                     name="message"
-                    placeholder="Tell us about your project, your current hosting situation, and what you need..."
+                    placeholder="Tell us about your site, current host, and what you need..."
                     value={formData.message}
                     onChange={handleChange}
                     required
-                  ></textarea>
+                  />
                 </div>
                 <button type="submit" className="btn-primary contact-submit">
                   Send Message →

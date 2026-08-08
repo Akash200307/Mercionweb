@@ -70,8 +70,8 @@ export default function WhyMercion() {
               <div className="uptime-label">Guaranteed Uptime</div>
             </div>
             <div className="why-stat-card card-1">
-              <div className="why-stat-num">500+</div>
-              <div className="why-stat-label">Active Clients</div>
+              <div className="why-stat-num">OLS</div>
+              <div className="why-stat-label">OpenLiteSpeed Stack</div>
             </div>
             <div className="why-stat-card card-2">
               <div className="why-stat-num">&lt;2hr</div>

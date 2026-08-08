@@ -1,5 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Ticker from './components/Ticker';
@@ -17,6 +19,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import CartDock from './components/CartDock';
 import CustomCursor from './components/CustomCursor';
 
 function Home() {
@@ -41,19 +44,22 @@ function Home() {
 
 function App() {
   return (
-    <>
-      <CustomCursor />
-      <Navbar />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-        </Routes>
-      </main>
-      <Footer />
-    </>
+    <AuthProvider>
+      <CartProvider>
+        <CustomCursor />
+        <Navbar />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+          </Routes>
+        </main>
+        <Footer />
+        <CartDock />
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

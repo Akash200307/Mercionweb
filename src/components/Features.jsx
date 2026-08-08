@@ -30,38 +30,38 @@ export default function Features() {
     {
       num: "01",
       icon: "⚡",
-      title: "Lightning Fast",
-      desc: "Optimized for Indian networks with local data centers and advanced caching."
+      title: "OpenLiteSpeed Fast",
+      desc: "CyberPanel + OpenLiteSpeed with caching tuned for snappy WordPress and PHP sites."
     },
     {
       num: "02",
       icon: "🛡️",
-      title: "Enterprise Security",
-      desc: "DDoS protection, malware scanning, and free SSL certificates come standard."
+      title: "Secure by Default",
+      desc: "Free Let's Encrypt SSL, firewall-friendly panel defaults, and isolation per account."
     },
     {
       num: "03",
-      icon: "🔄",
-      title: "Auto Scalable",
-      desc: "Handles traffic spikes gracefully without taking your business offline."
+      icon: "🖥️",
+      title: "CyberPanel Access",
+      desc: "Manage sites, databases, email, and SSL from a modern panel — no cPanel tax."
     },
     {
       num: "04",
       icon: "💾",
-      title: "Daily Backups",
-      desc: "Automated daily backups ensure your data is always safe and recoverable."
+      title: "Backups Included",
+      desc: "Plan-based backups (weekly on entry WP, daily on higher tiers) so restore is ready when you need it."
     },
     {
       num: "05",
-      icon: "⚙️",
-      title: "CyberPanel Native",
-      desc: "Manage your sites effortlessly with an intuitive, modern control panel."
+      icon: "🌐",
+      title: "Bring Your Domain",
+      desc: "Point DNS to Mercion at launch. Domain registration & transfer are launching soon."
     },
     {
       num: "06",
       icon: "💳",
-      title: "INR Billing",
-      desc: "Native Razorpay integration. Pay in Rupees without forex markup fees."
+      title: "INR + Razorpay",
+      desc: "Pay in rupees through WHMCS. Transparent renewals — no forex shock on hosting."
     }
   ];
 

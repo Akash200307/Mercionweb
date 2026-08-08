@@ -5,7 +5,7 @@ export default function Testimonials() {
   const revealRefs = useRef([]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
           setTimeout(() => entry.target.classList.add('visible'), i * 100);
@@ -13,59 +13,61 @@ export default function Testimonials() {
       });
     }, { threshold: 0.1 });
 
-    revealRefs.current.forEach(el => {
+    revealRefs.current.forEach((el) => {
       if (el) observer.observe(el);
     });
 
     return () => observer.disconnect();
   }, []);
 
-  const addToRefs = el => {
+  const addToRefs = (el) => {
     if (el && !revealRefs.current.includes(el)) {
       revealRefs.current.push(el);
     }
   };
 
-  const testimonials = [
+  // Phase 1: value promises (replace with real reviews after first clients)
+  const highlights = [
     {
-      initial: "R",
-      name: "Rahul Mehta",
-      role: "Founder, TechStartup.in",
-      text: "Switched from a well-known provider and the difference is night and day. Our site loads 3x faster and the billing is actually transparent. No renewal shock."
+      initial: '₹',
+      name: 'Transparent INR pricing',
+      role: 'No renewal shock',
+      text: 'Same advertised monthly rate at renewal. Annual billing gives two months free in year one — WHMCS invoices stay clear.',
     },
     {
-      initial: "P",
-      name: "Priya Sharma",
-      role: "E-commerce Owner",
-      text: "The automated invoicing alone saved me hours every month. Support actually responds within hours, not days. Most affordable hosting I've found in India."
+      initial: '⚡',
+      name: 'CyberPanel + OpenLiteSpeed',
+      role: 'Built for speed',
+      text: 'Modern panel, free SSL, and LiteSpeed caching on WordPress plans. Point your existing domain and go live without registrar lock-in.',
     },
     {
-      initial: "K",
-      name: "Karthik Rajan",
-      role: "Web Agency, Chennai",
-      text: "We host 12 client websites through MERCION. The CyberPanel setup is clean, uptime has been flawless for 8 months straight. Far more reliable than our old provider."
-    }
+      initial: '🛠',
+      name: 'Human support in IST',
+      role: 'Under 2 hours target',
+      text: 'Sales and technical help over email; clients also open tickets in the WHMCS portal. We’re building Mercion with early customers in mind.',
+    },
   ];
 
   return (
     <section className="testimonials">
       <div className="section-label reveal" ref={addToRefs}>
         <div className="section-label-line"></div>
-        <span className="section-label-text">// Client Feedback</span>
+        <span className="section-label-text">// What You Get</span>
       </div>
-      <h2 className="section-title reveal" ref={addToRefs}>TRUSTED BY<br />REAL BUSINESSES</h2>
+      <h2 className="section-title reveal" ref={addToRefs}>
+        BUILT FOR
+        <br />
+        EARLY CUSTOMERS
+      </h2>
 
       <div className="test-grid">
-        {testimonials.map((test, index) => (
+        {highlights.map((item, index) => (
           <div key={index} className="test-card reveal" ref={addToRefs}>
-            <div className="test-quote">"</div>
-            <p className="test-text">{test.text}</p>
+            <div className="test-avatar">{item.initial}</div>
+            <p className="test-text">&ldquo;{item.text}&rdquo;</p>
             <div className="test-author">
-              <div className="test-avatar">{test.initial}</div>
-              <div>
-                <div className="test-name">{test.name}</div>
-                <div className="test-role">{test.role}</div>
-              </div>
+              <div className="test-name">{item.name}</div>
+              <div className="test-role">{item.role}</div>
             </div>
           </div>
         ))}

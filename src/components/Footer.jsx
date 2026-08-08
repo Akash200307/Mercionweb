@@ -1,3 +1,4 @@
+import { whmcsUrls } from '../config/whmcs';
 import './Footer.css';
 
 export default function Footer() {
@@ -19,6 +20,7 @@ export default function Footer() {
           <ul className="footer-links">
             <li><a href="#pricing">High Performance Hosting</a></li>
             <li><a href="#pricing">WordPress Hosting</a></li>
+            <li><a href="#pricing">Domains — Launching Soon</a></li>
           </ul>
         </div>
         <div>
@@ -26,6 +28,7 @@ export default function Footer() {
           <ul className="footer-links">
             <li><a href="#about">About Us</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href={whmcsUrls.clientArea} target="_blank" rel="noopener noreferrer">Client Area</a></li>
           </ul>
         </div>
       </div>

@@ -1,0 +1,132 @@
+.cart-dock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  pointer-events: none;
+}
+
+.cart-dock-inner {
+  pointer-events: auto;
+  max-width: 960px;
+  margin: 0 auto;
+  background: rgba(10, 10, 10, 0.92);
+  border: 1px solid var(--border2);
+  backdrop-filter: blur(12px);
+  padding: 14px 18px;
+}
+
+.cart-dock-steps {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.cart-dock-steps .done {
+  color: var(--green);
+}
+
+.cart-dock-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.cart-dock-block {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 12px;
+  align-items: center;
+}
+
+.cart-dock-label {
+  grid-column: 1 / -1;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.cart-dock-plan {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  color: var(--white);
+}
+
+.cart-dock-plan span {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.cart-dock-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.cart-dock-btn {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  border: 1px solid var(--border2);
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.cart-dock-btn.primary {
+  background: var(--red);
+  border-color: var(--red);
+  color: #000;
+}
+
+.cart-dock-btn.secondary {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.cart-dock-btn.ghost {
+  opacity: 0.85;
+}
+
+.cart-dock-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cart-dock-msg {
+  margin-top: 10px;
+  font-family: var(--font-heading);
+  font-size: 13px;
+}
+
+.cart-dock-msg--success { color: #6edd8a; }
+.cart-dock-msg--error { color: #ff8a8a; }
+.cart-dock-msg--info { color: var(--text-secondary); }
+
+@media (max-width: 640px) {
+  .cart-dock-block {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-dock-actions {
+    width: 100%;
+  }
+
+  .cart-dock-actions .cart-dock-btn {
+    flex: 1;
+  }
+}

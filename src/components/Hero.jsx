@@ -31,11 +31,11 @@ export default function Hero() {
       <div className="hero-stats">
         <div className="hero-stat">
           <div className="hero-stat-num">99.9%</div>
-          <div className="hero-stat-label">SLA Uptime</div>
+          <div className="hero-stat-label">Uptime Target</div>
         </div>
         <div className="hero-stat">
-          <div className="hero-stat-num">500+</div>
-          <div className="hero-stat-label">Active Clients</div>
+          <div className="hero-stat-num">INR</div>
+          <div className="hero-stat-label">Razorpay Billing</div>
         </div>
         <div className="hero-stat">
           <div className="hero-stat-num">&lt;2hr</div>

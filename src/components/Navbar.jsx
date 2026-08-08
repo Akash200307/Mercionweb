@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './Navbar.css';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const { user, isAuthenticated, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,8 +70,21 @@ export default function Navbar() {
             <li key={link.href}><Link to={link.href} onClick={(e) => handleNavClick(e, link.href)}>{link.label}</Link></li>
           ))}
           <li><Link to={isHomePage ? "#contact" : "/contact"} className="nav-link-auth" onClick={(e) => isHomePage ? handleNavClick(e, '#contact') : undefined}>Contact Us</Link></li>
-          <li><Link to="/signin" className="nav-cta">Sign In</Link></li>
-          <li><Link to="/signup" className="nav-link-auth nav-link-auth-primary">Sign Up</Link></li>
+          {isAuthenticated ? (
+            <>
+              <li><span className="nav-link-auth" style={{ opacity: 0.85 }}>{user?.name?.split(' ')[0] || 'Account'}</span></li>
+              <li>
+                <button type="button" className="nav-cta" onClick={() => { logout(); closeMenu(); }}>
+                  Sign Out
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li><Link to="/signin" className="nav-cta" onClick={closeMenu}>Sign In</Link></li>
+              <li><Link to="/signup" className="nav-link-auth nav-link-auth-primary" onClick={closeMenu}>Sign Up</Link></li>
+            </>
+          )}
         </ul>
 
         <button
@@ -104,12 +119,20 @@ export default function Navbar() {
             </li>
           </ul>
           <div className="nav-overlay-auth">
-            <Link to="/signin" className="nav-overlay-cta" onClick={closeMenu}>
-              Sign In
-            </Link>
-            <Link to="/signup" className="nav-overlay-auth-link" onClick={closeMenu}>
-              Sign Up
-            </Link>
+            {isAuthenticated ? (
+              <button type="button" className="nav-overlay-cta" onClick={() => { logout(); closeMenu(); }}>
+                Sign Out ({user?.name?.split(' ')[0] || 'Account'})
+              </button>
+            ) : (
+              <>
+                <Link to="/signin" className="nav-overlay-cta" onClick={closeMenu}>
+                  Sign In
+                </Link>
+                <Link to="/signup" className="nav-overlay-auth-link" onClick={closeMenu}>
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@
   position: relative;
   overflow: hidden;
   will-change: transform;
+  padding-bottom: 140px;
 }
 
 .pricing-bg-text {
@@ -24,6 +25,148 @@
   margin-bottom: 48px;
   position: relative;
   z-index: 2;
+}
+
+.pricing-flow-hint {
+  margin-top: 12px;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  color: var(--text-secondary);
+  letter-spacing: 0.3px;
+}
+
+.plan-card.selected {
+  border-color: var(--red);
+  box-shadow: 0 0 0 1px var(--red), 0 12px 40px rgba(230, 0, 0, 0.15);
+}
+
+.plan-card:not(.enterprise) {
+  cursor: pointer;
+}
+
+.plan-cta-selected {
+  background: rgba(230, 0, 0, 0.15) !important;
+  border-color: var(--red) !important;
+  color: var(--white) !important;
+}
+
+.domains-soon-banner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 36px;
+  padding: 18px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(180, 40, 40, 0.08)),
+    radial-gradient(circle at 0% 50%, rgba(200, 50, 50, 0.12), transparent 55%);
+  position: relative;
+  z-index: 2;
+}
+
+.domains-soon-badge {
+  flex-shrink: 0;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--void);
+  background: var(--red);
+  padding: 8px 12px;
+}
+
+.domains-soon-copy {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.domains-soon-copy strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.pricing-whmcs-note {
+  margin: 28px 0 0;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  color: var(--text-secondary);
+  position: relative;
+  z-index: 2;
+}
+
+.pricing-whmcs-note a {
+  color: var(--red);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pricing-pay-toast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 24px;
+  padding: 14px 18px;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  position: relative;
+  z-index: 2;
+  border: 1px solid var(--border);
+}
+
+.pricing-pay-toast--success {
+  border-color: rgba(0, 204, 102, 0.4);
+  background: rgba(0, 204, 102, 0.1);
+  color: #6edd8a;
+}
+
+.pricing-pay-toast--error {
+  border-color: rgba(230, 0, 0, 0.45);
+  background: rgba(230, 0, 0, 0.1);
+  color: #ff8a8a;
+}
+
+.pricing-pay-toast--info {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+}
+
+.pricing-pay-toast button {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+button.plan-cta {
+  width: 100%;
+  font: inherit;
+  cursor: pointer;
+  appearance: none;
+  background: transparent;
+  color: inherit;
+}
+
+button.plan-cta:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+@media (max-width: 640px) {
+  .domains-soon-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
 }
 
 /* Pricing Tabs */

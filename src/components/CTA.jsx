@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { site } from '../config/site';
 import './CTA.css';
 
 export default function CTA() {
@@ -43,8 +44,8 @@ export default function CTA() {
           Annual plans get 2 months FREE in year one.
         </p>
         <div className="cta-actions">
-          <a href="#pricing" className="btn-primary">Start Free Trial</a>
-          <a href="mailto:hello@mercion.io" className="btn-secondary">Talk to Sales</a>
+          <a href="#pricing" className="btn-primary">Choose a Plan</a>
+          <a href={`mailto:${site.emails.hello}`} className="btn-secondary">Talk to Sales</a>
         </div>
       </div>
     </section>

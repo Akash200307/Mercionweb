@@ -116,6 +116,10 @@
   font-weight: 700 !important;
   border-radius: 8px;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+  appearance: none;
 }
 
 .nav-cta:hover {

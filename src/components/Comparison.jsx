@@ -57,7 +57,7 @@ export default function Comparison() {
               </tr>
               <tr>
                 <td className="feature-col">Performance Tech</td>
-                <td className="mercion-col"><span className="check">✔</span> OLS + NVMe</td>
+                <td className="mercion-col"><span className="check">✔</span> OLS + SSD</td>
                 <td><span className="partial">LiteSpeed</span></td>
                 <td><span className="cross">✘</span> Apache + HDD</td>
                 <td><span className="cross">✘</span> Apache</td>
@@ -96,12 +96,12 @@ export default function Comparison() {
                 <td><span className="check">✔</span></td>
               </tr>
               <tr>
-                <td className="feature-col">Auto Scaling</td>
-                <td className="mercion-col"><span className="check">✔</span> Premium</td>
-                <td><span className="cross">✘</span></td>
-                <td><span className="cross">✘</span></td>
-                <td><span className="cross">✘</span></td>
-                <td><span className="cross">✘</span></td>
+                <td className="feature-col">WHMCS Client Portal</td>
+                <td className="mercion-col"><span className="check">✔</span> Included</td>
+                <td><span className="partial">Custom panel</span></td>
+                <td><span className="partial">Account center</span></td>
+                <td><span className="partial">Account center</span></td>
+                <td><span className="partial">Account center</span></td>
               </tr>
               <tr className="highlight-row">
                 <td className="feature-col">Annual Plan: 2 Months Free</td>
@@ -164,7 +164,7 @@ export default function Comparison() {
               </tr>
               <tr>
                 <td className="feature-col">Staging Environment</td>
-                <td className="mercion-col"><span className="check">✔</span> Business+</td>
+                <td className="mercion-col"><span className="check">✔</span> WP Pro+</td>
                 <td><span className="cross">✘</span></td>
                 <td><span className="cross">✘</span></td>
                 <td><span className="partial">Pro Only</span></td>
@@ -172,7 +172,7 @@ export default function Comparison() {
               </tr>
               <tr>
                 <td className="feature-col">Free Migration</td>
-                <td className="mercion-col"><span className="check">✔</span> Business+</td>
+                <td className="mercion-col"><span className="check">✔</span> WP Pro+</td>
                 <td><span className="partial">Paid</span></td>
                 <td><span className="partial">Paid</span></td>
                 <td><span className="partial">1st Year Only</span></td>
@@ -188,7 +188,7 @@ export default function Comparison() {
               </tr>
               <tr>
                 <td className="feature-col">Daily Backups</td>
-                <td className="mercion-col"><span className="check">✔</span> All Plans</td>
+                <td className="mercion-col"><span className="check">✔</span> Pro+</td>
                 <td><span className="partial">Weekly Only</span></td>
                 <td><span className="partial">Weekly Only</span></td>
                 <td><span className="partial">Daily (Pro+)</span></td>
