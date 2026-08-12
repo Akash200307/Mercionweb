@@ -18,7 +18,11 @@ services:
     restart: unless-stopped
     init: true
     env_file:
-      - .env
+      # Optional so the stack still builds where env is injected another way
+      # (e.g. Coolify sets service env directly). Required vars must still be
+      # provided at runtime or the API will exit on boot.
+      - path: .env
+        required: false
     environment:
       NODE_ENV: production
       PORT: "3001"
