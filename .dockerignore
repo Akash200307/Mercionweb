@@ -1,0 +1,34 @@
+# Dependencies (reinstalled inside the image)
+node_modules
+**/node_modules
+
+# Build output
+dist
+dist-ssr
+
+# Secrets & local env (never bake into images)
+.env
+.env.*
+!.env.example
+!.env.production.example
+
+# Runtime data (persisted via a named volume instead)
+server/data
+
+# VCS & CI
+.git
+.gitignore
+.github
+
+# Editor / OS cruft
+.vscode
+.idea
+.DS_Store
+
+# Logs
+*.log
+logs
+
+# Docs & one-off assets not needed at build time
+temp_assets
+*.md
