@@ -17,15 +17,21 @@ const KEY_ID = process.env.RAZORPAY_KEY_ID;
 const KEY_SECRET = process.env.RAZORPAY_KEY_SECRET;
 const JWT_SECRET = process.env.JWT_SECRET || KEY_SECRET || 'mercion-dev-jwt-secret';
 
-if (!KEY_ID || !KEY_SECRET) {
-  console.error('Missing RAZORPAY_KEY_ID or RAZORPAY_KEY_SECRET in environment.');
-  process.exit(1);
-}
+// Payments require Razorpay credentials. When they are absent we keep the
+// server running (auth and the rest of the site stay available) and only the
+// payment endpoints report that they are not configured. This avoids taking
+// the whole app down over a missing/optional payment key on first deploy.
+const paymentsEnabled = Boolean(KEY_ID && KEY_SECRET);
+const razorpay = paymentsEnabled
+  ? new Razorpay({ key_id: KEY_ID, key_secret: KEY_SECRET })
+  : null;
 
-const razorpay = new Razorpay({
-  key_id: KEY_ID,
-  key_secret: KEY_SECRET,
-});
+if (!paymentsEnabled) {
+  console.warn(
+    'RAZORPAY_KEY_ID/RAZORPAY_KEY_SECRET not set — payment endpoints are disabled. ' +
+      'Set them to enable checkout; auth and the site work without them.'
+  );
+}
 
 app.use(cors({ origin: true }));
 app.use(express.json());
@@ -40,6 +46,9 @@ app.use('/api/auth', createAuthRouter(express, { jwtSecret: JWT_SECRET }));
  * Body: { amount: number (paise), currency?: string, receipt?: string, notes?: object }
  */
 app.post('/api/create-order', async (req, res) => {
+  if (!paymentsEnabled) {
+    return res.status(503).json({ error: 'Payments are not configured on the server.' });
+  }
   try {
     const amount = Number(req.body?.amount);
     const currency = (req.body?.currency || 'INR').toUpperCase();
@@ -82,6 +91,9 @@ app.post('/api/create-order', async (req, res) => {
  * Body: { razorpay_order_id, razorpay_payment_id, razorpay_signature }
  */
 app.post('/api/verify-payment', (req, res) => {
+  if (!paymentsEnabled) {
+    return res.status(503).json({ success: false, error: 'Payments are not configured on the server.' });
+  }
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body || {};
 
   if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
