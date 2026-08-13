@@ -65,8 +65,11 @@ services:
     depends_on:
       api:
         condition: service_healthy
-    ports:
-      - "${WEB_PORT:-8080}:80"
+    # No host port is published here so reverse-proxy platforms (e.g. Coolify's
+    # Traefik) can route a domain to this container without host-port conflicts.
+    # For direct local access, docker-compose.override.yml publishes a host port.
+    expose:
+      - "80"
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
       interval: 30s

@@ -1,0 +1,12 @@
+# Local development overrides.
+#
+# `docker compose` auto-loads this file only when you do NOT pass an explicit
+# `-f` (i.e. plain `docker compose up`). Platforms like Coolify invoke compose
+# with `-f docker-compose.yaml`, so this file is ignored there and their reverse
+# proxy handles routing to the `web` container's exposed port 80.
+#
+# Here we publish the web container to a host port for direct browser access.
+services:
+  web:
+    ports:
+      - "${WEB_PORT:-8080}:80"
